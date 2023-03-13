@@ -48,8 +48,12 @@ object List:
   //     partition(l, _ => true) == (l, Nil)
   //     partition(l, _ => false) == (Nil, l)
 
+  //para llamar a foldRight necesito una función con dos parámetros de entrada
+  // por tanto, igual me debería montar una función auxiliar en plan
+  // def unify(elem: A, li: List[A]): List[A]
+  //dado un elemento y lista de salida, si cumple con p, lo añado 
   def partition[A](l: List[A])(p: A => Boolean): (List[A], List[A]) = 
-    foldRight(l, Nil: List[A])(p(_))
+   ???/// foldRight(l, Nil: List[A])(p(_))
     
   /*  
     l match
@@ -107,7 +111,10 @@ object List:
   // Podeu suposar que la llista està realment formada per dígits
   // List(1, 2, 3) -> 123
 
-  def digitsToNum(l: List[Int]): Int = ???
+  def digitsToNum(l: List[Int]): Int =
+    def mkString(acc: String, a: Int): String = 
+      (acc + a.toString())
+    foldLeft(l, "")((acc: String, a: Int) => (a.toString() + acc)).toInt 
 
   // 6. mergeSorted
 
