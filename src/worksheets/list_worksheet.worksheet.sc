@@ -10,11 +10,11 @@ def myFunc(a: Int): Boolean =
 
 myFunc(2)
 
-val l1 = List(Nil: List[Int], 1, Nil: List[Int], 3, Nil: List[Int])
+val l1aaaaaaa = List(Nil: List[Int], 1, Nil: List[Int], 3, Nil: List[Int])
 
 val unsorted = List(4, 1, 3, 2)
 
-sort1(unsorted)
+//sort1(unsorted)
 
 var one = 1
 
@@ -29,3 +29,22 @@ var strAndOneToString = str + oneToString
 var chanchan: Int = (str + one.toString()).toInt
 
 digitsToNum(unsorted)
+
+var unsorted2 = List(4, 3)
+
+def insertionSort(l: List[Int], a: Int): List[Int] = 
+      l match
+        case Cons(h, t) => if a < h then Cons(a, l) else Cons(h, insertionSort(t, a))
+        case Nil => Cons(a, Nil)
+
+insertionSort(Cons(1, List(3, 4)), 2)
+
+sort1(unsorted)(_ >= _)
+
+find(unsorted)(_ % 5 == 0)
+
+var l1 = List(1, 3, 5)
+
+var l2 = List(4, 6)
+
+mergeSorted(l1, l2)(_ < _)

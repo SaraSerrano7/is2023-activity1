@@ -125,7 +125,9 @@ object List:
   // és buida i l'altra no.
   def mergeSorted[A](l1: List[A], l2: List[A])(
       ord: (A, A) => Boolean
-  ): List[A] = ???
+  ): List[A] = 
+    sort1(append(l1, l2))(ord)
+  
 
   // 7. Veu una versió del digitsToNum que tracti l'error de que un dels números de la llista no és
   // un dígit -> la capçalera de la funció serà part del problema
