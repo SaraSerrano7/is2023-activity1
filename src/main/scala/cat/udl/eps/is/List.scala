@@ -137,7 +137,7 @@ object List:
   // un dígit -> la capçalera de la funció serà part del problema
 
 
-  def digitsToNumOption[A](l: List[A]): Option[List[A]] =  
+  def digitsToNumOption[A](l: List[A]): Option[A] =  
     l match
       case Cons(h: Int, t: List[Int]): List[Int]  => Some(digitsToNum(l))
       case _ => None
