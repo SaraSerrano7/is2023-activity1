@@ -79,12 +79,12 @@ object List:
   def partitionMap[A, B, C](
       l: List[A]
   )(p: A => Either[B, C]): (List[B], List[C]) = 
-    def decideListEither[A](elem: A, li: (List[A], List[A])):  (List[A], List[A]) =
+    def decideListEither[A](elem: A, li: (List[B], List[C])):  (List[B], List[C]) =
       p(elem) match
-        case Left(value: A) => (li._1, Cons(value, li._2))
-        case Right(value: A) => (Cons(value, li._1), li._2)
+        case Left(value: C) => (li._1, Cons(value, li._2))
+        case Right(value: B) => (Cons(value, li._1), li._2)
 
-    foldRight(l, (Nil, Nil))( (h: A, acc: (List[A], List[A])) => decideListEither(h, acc))
+    foldRight(l, (Nil: List[B], Nil: List[C]))( (h: A, acc: (List[B], List[C])) => decideListEither(h, acc))
     
 
   // 3. find (stack-safe)
