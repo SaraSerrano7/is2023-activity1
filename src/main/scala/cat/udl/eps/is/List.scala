@@ -112,8 +112,8 @@ object List:
   // List(1, 2, 3) -> 123
 
   def digitsToNum(l: List[Int]): Int =
-    def mkString(acc: String, a: Int): String = 
-      (acc + a.toString())
+   // def mkString(acc: String, a: Int): String = 
+   //   (acc + a.toString())
     foldLeft(l, "")((acc: String, a: Int) => (a.toString() + acc)).toInt 
 
   // 6. mergeSorted
@@ -131,3 +131,10 @@ object List:
 
   // 7. Veu una versió del digitsToNum que tracti l'error de que un dels números de la llista no és
   // un dígit -> la capçalera de la funció serà part del problema
+
+
+  def digitsToNumOption[A](l: List[A]): Option[A] =  
+    l match
+      case _: List[Int]  => Some(digitsToNum(l))
+      case _ => None
+    
