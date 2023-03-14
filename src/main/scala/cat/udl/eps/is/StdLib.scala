@@ -1,6 +1,7 @@
 package cat.udl.eps.is
 
 import scala.List
+import cat.udl.eps.is.List.foldLeft
 
 /*
   A List (no pun intended) on useful methods on lists to explore (they can be useful
@@ -45,7 +46,24 @@ object StdLib {
 
   // 1. The result is a map that, for each length, returns the
   // number of words of this particular length
-  def countLengths(words: List[String]): Map[Int, Int] = ???
+
+/*
+
+hay palabras -> añadimos al mapa
+  necesitamos un acumulador -> el mapa actual --> funcion auxiliar, acc inicial --> mapa vacío
+
+ya no hay -> ordenamos numéricamente las parejas
+
+*/
+
+  def countLengths(words: List[String]): Map[Int, Int] = 
+    def addPair(oldMap: Map[Int, Int], len: Int): Map[Int, Int] = 
+      if oldMap.exists(_._1 == len) then // miramos si esta longitud la hemos visto antes
+        val currentValue = oldMap.apply(len) // buscamos cuantas veces ha aparecido la longitud 
+        oldMap + (len -> (currentValue + 1)) // añadimos una aparición más
+        else oldMap + (len -> 1) // no hemos encontrado esta longitud -> añadimos que la hemos visto 1 vez
+    // una vez terminado el foldLeft, ordenamos las claves para mayor armonía visual
+    foldLeft(words, Map[Int, Int]())(addPair).toSeq.sortBy(_._1).toMap
 
   // 2. The result is the sum of the first n powers of b
   // that is, b^0 + b^1 + .... + b^(n-1)
