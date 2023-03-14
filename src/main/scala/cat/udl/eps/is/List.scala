@@ -53,10 +53,10 @@ object List:
   // def unify(elem: A, li: List[A]): List[A]
   //dado un elemento y lista de salida, si cumple con p, lo añado 
   def partition[A](l: List[A])(p: A => Boolean): (List[A], List[A]) = 
-    def myFunc[A](elem: A, li: (List[A], List[A])): (List[A], List[A]) = 
+    def decideList[A](elem: A, li: (List[A], List[A])): (List[A], List[A]) = 
       if p(elem: A) then (Cons(elem, li._1), li._2) else (li._1, Cons(elem, li._2))
    
-    foldRight(l, (Nil, Nil))( (h: A, acc: (List[A], List[A])) => myFunc(h, acc))
+    foldRight(l, (Nil, Nil))( (h: A, acc: (List[A], List[A])) => decideList(h, acc))
     
   /*  
     l match
@@ -78,7 +78,14 @@ object List:
 
   def partitionMap[A, B, C](
       l: List[A]
-  )(p: A => Either[B, C]): (List[B], List[C]) = ??? 
+  )(p: A => Either[B, C]): (List[B], List[C]) = 
+    def decideListEither[A](elem: A, li: (List[A], List[A])):  (List[A], List[A]) =
+      p(elem) match
+        case Left(value: A) => (li._1, Cons(value, li._2))
+        case Right(value: A) => (Cons(value, li._1), li._2)
+
+    foldRight(l, (Nil, Nil))( (h: A, acc: (List[A], List[A])) => decideListEither(h, acc))
+    
 
   // 3. find (stack-safe)
 
