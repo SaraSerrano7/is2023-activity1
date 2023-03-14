@@ -53,7 +53,10 @@ object List:
   // def unify(elem: A, li: List[A]): List[A]
   //dado un elemento y lista de salida, si cumple con p, lo añado 
   def partition[A](l: List[A])(p: A => Boolean): (List[A], List[A]) = 
-   ???/// foldRight(l, Nil: List[A])(p(_))
+    def myFunc[A](elem: A, li: (List[A], List[A])): (List[A], List[A]) = 
+      if p(elem: A) then (Cons(elem, li._1), li._2) else (li._1, Cons(elem, li._2))
+   
+    foldRight(l, (Nil, Nil))( (h: A, acc: (List[A], List[A])) => myFunc(h, acc))
     
   /*  
     l match
@@ -133,8 +136,8 @@ object List:
   // un dígit -> la capçalera de la funció serà part del problema
 
 
-  def digitsToNumOption[A](l: List[A]): Option[A] =  
+  def digitsToNumOption[A](l: List[A]): Option[List[A]] =  
     l match
-      case _: List[Int]  => Some(digitsToNum(l))
+      case Cons(h: Int, t: List[Int]): List[Int]  => Some(digitsToNum(l))
       case _ => None
     
