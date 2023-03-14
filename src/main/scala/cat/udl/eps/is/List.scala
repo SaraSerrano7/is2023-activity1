@@ -49,10 +49,10 @@ object List:
   //     partition(l, _ => false) == (Nil, l)
 
   def partition[A](l: List[A])(p: A => Boolean): (List[A], List[A]) = 
-    def decideList[A](elem: A, li: (List[A], List[A])): (List[A], List[A]) = 
-      if p(elem: A) then (Cons(elem, li._1), li._2) else (li._1, Cons(elem, li._2))
+    def decideList(elem: A, li: (List[A], List[A])): (List[A], List[A]) = 
+      if p(elem) then (Cons(elem, li._1), li._2) else (li._1, Cons(elem, li._2))
    
-    foldRight(l, (Nil, Nil))( (h: A, acc: (List[A], List[A])) => decideList(h, acc))
+    foldRight(l, (Nil:List[A], Nil: List[A]))( (h: A, acc: (List[A], List[A])) => decideList(h, acc))
     
   /*  
     l match
@@ -75,7 +75,7 @@ object List:
   def partitionMap[A, B, C](
       l: List[A]
   )(p: A => Either[B, C]): (List[B], List[C]) = 
-    def decideListEither[A](elem: A, li: (List[B], List[C])):  (List[B], List[C]) =
+    def decideListEither(elem: A, li: (List[B], List[C])):  (List[B], List[C]) =
       p(elem) match
         case Left(value: C) => (li._1, Cons(value, li._2))
         case Right(value: B) => (Cons(value, li._1), li._2)
