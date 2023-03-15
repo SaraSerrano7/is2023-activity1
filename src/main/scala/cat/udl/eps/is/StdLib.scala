@@ -57,7 +57,8 @@ ya no hay -> ordenamos numéricamente las parejas
 */
   // tengo que pasarle la word, no la length
   def countLengths(words: List[String]): Map[Int, Int] = 
-    def addPair(oldMap: Map[Int, Int], len: Int): Map[Int, Int] = 
+    def addPair(oldMap: Map[Int, Int], str: String): Map[Int, Int] = 
+      val len = str.length()
       if oldMap.exists(_._1 == len) then // miramos si esta longitud la hemos visto antes
         val currentValue = oldMap.apply(len) // buscamos cuantas veces ha aparecido la longitud 
         oldMap + (len -> (currentValue + 1)) // añadimos una aparición más
