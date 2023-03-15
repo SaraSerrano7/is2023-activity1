@@ -47,12 +47,13 @@ object List:
   // - l'ordre dels elements es manté, és a dir:
   //     partition(l, _ => true) == (l, Nil)
   //     partition(l, _ => false) == (Nil, l)
-
+    
+  //el error era que por mucho que las dos sean As, no son la misma A la de fuera que la de dentro.
   def partition[A](l: List[A])(p: A => Boolean): (List[A], List[A]) = 
     def decideList(elem: A, li: (List[A], List[A])): (List[A], List[A]) = 
       if p(elem) then (Cons(elem, li._1), li._2) else (li._1, Cons(elem, li._2))
    
-    foldRight(l, (Nil:List[A], Nil: List[A]))( (h: A, acc: (List[A], List[A])) => decideList(h, acc))
+    foldRight(l, (Nil:List[A], Nil: List[A]))( (h: A, acc: (List[A], List[A])) => decideList(h, acc)) //otra forma de arreglarlo: decideList[A](h, acc))
     
   /*  
     l match
@@ -136,7 +137,7 @@ object List:
   // 7. Veu una versió del digitsToNum que tracti l'error de que un dels números de la llista no és
   // un dígit -> la capçalera de la funció serà part del problema
 
-
+//option de int, que esten entre 0 y 9
   def digitsToNumOption[A](l: List[A]): Option[A] =  
     l match
       case Cons(h: Int, t: List[Int]): List[Int]  => Some(digitsToNum(l))

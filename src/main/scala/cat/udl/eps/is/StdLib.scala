@@ -55,7 +55,7 @@ hay palabras -> añadimos al mapa
 ya no hay -> ordenamos numéricamente las parejas
 
 */
-
+  // tengo que pasarle la word, no la length
   def countLengths(words: List[String]): Map[Int, Int] = 
     def addPair(oldMap: Map[Int, Int], len: Int): Map[Int, Int] = 
       if oldMap.exists(_._1 == len) then // miramos si esta longitud la hemos visto antes
@@ -63,7 +63,7 @@ ya no hay -> ordenamos numéricamente las parejas
         oldMap + (len -> (currentValue + 1)) // añadimos una aparición más
         else oldMap + (len -> 1) // no hemos encontrado esta longitud -> añadimos que la hemos visto 1 vez
     // una vez terminado el foldLeft, ordenamos las claves para mayor armonía visual
-    foldLeft(words, Map[Int, Int]())(addPair).toSeq.sortBy(_._1).toMap
+    words.foldLeft(Map[Int, Int]())(addPair)
 
   // 2. The result is the sum of the first n powers of b
   // that is, b^0 + b^1 + .... + b^(n-1)
