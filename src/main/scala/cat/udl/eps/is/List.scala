@@ -78,8 +78,8 @@ object List:
   )(p: A => Either[B, C]): (List[B], List[C]) = 
     def decideListEither(elem: A, li: (List[B], List[C])):  (List[B], List[C]) =
       p(elem) match
-        case Left(value: C) => (li._1, Cons(value, li._2))
-        case Right(value: B) => (Cons(value, li._1), li._2)
+        case Left(value: B) => (Cons(value, li._1), li._2)
+        case Right(value: C) => (li._1, Cons(value, li._2))
 
     foldRight(l, (Nil: List[B], Nil: List[C]))( (h: A, acc: (List[B], List[C])) => decideListEither(h, acc))
     
@@ -141,6 +141,7 @@ object List:
   def digitsToNumOption(l: List[Int]): Option[Int] =  
     l match
       //ojo, verificar que es para todos los elementos, no solo el primero
-      case Cons(h, t) if h < 0 && h > 9   => Some(digitsToNum(l))
+      case Cons(h, t) if h < 0 && h > 9   => digitsToNumOption(t)
+      case Nil => Some(digitsToNum(l))
       case _ => None
     
