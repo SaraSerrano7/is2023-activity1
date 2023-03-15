@@ -138,8 +138,9 @@ object List:
   // un dígit -> la capçalera de la funció serà part del problema
 
 //option de int, que esten entre 0 y 9
-  def digitsToNumOption[A](l: List[A]): Option[A] =  
+  def digitsToNumOption(l: List[Int]): Option[Int] =  
     l match
-      case Cons(h: Int, t: List[Int]): List[Int]  => Some(digitsToNum(l))
+      //ojo, verificar que es para todos los elementos, no solo el primero
+      case Cons(h, t) if h < 0 && h > 9   => Some(digitsToNum(l))
       case _ => None
     
