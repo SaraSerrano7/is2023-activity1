@@ -167,6 +167,7 @@ object List:
       case _ => None
     */
 
+    //se asume lista no vacía
   def digitsToNumOption2(l: List[Int]): Option[Int] = 
     def checkList2(li: List[Int], isDigit: Boolean): Option[Int] =
       li match
