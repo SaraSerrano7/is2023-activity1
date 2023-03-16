@@ -21,7 +21,14 @@ enum BST[+A]:
 
   // 2.find
 
-  def find[B >: A](a: B)(lt: (B, B) => Boolean): Boolean = ???
+  //nota: se podría mejorar el insert usando primero el find, que si da true se retorna this (o con Option)
+  def find[B >: A](a: B)(lt: (B, B) => Boolean): Boolean = 
+    this match
+      case Node(left, value, right) => if lt(a, value)
+        then true
+        else left.find(a)(lt) || right.find(a)(lt)
+      case Empty => false
+    
 
   // 3.fold
 
