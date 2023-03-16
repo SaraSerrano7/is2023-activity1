@@ -51,4 +51,17 @@ mergeSorted(l1, l2)(_ < _)
 
 val empty_list = List[Int]()
 
-//digitsToNum(empty_list)
+val digitListOk = List(1, 2, 3, 4)
+
+val digitsListNotOk = List(1, 2, -4, 24)
+
+digitsToNumOption(empty_list)
+
+digitsToNumOption(digitListOk)
+
+digitsToNumOption(digitsListNotOk)
+
+val partitionList = List(1, 2, 3, 4, 5)
+
+partition(partitionList)(_ % 2 == 1)
+//partitionMap(partitionList)(_ / 5)

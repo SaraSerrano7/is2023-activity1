@@ -119,7 +119,9 @@ object List:
   // List(1, 2, 3) -> 123
 
   def digitsToNum(l: List[Int]): Int =
-    foldLeft(l, "")((acc: String, a: Int) => (a.toString() + acc)).toInt 
+    //con un foldLeft, obtenemos el resultdo al reves. Si le metemos un reverse, para eso hacemos un foldRight
+    //foldLeft(l, "")((acc: String, a: Int) => (a.toString() + acc)).toInt 
+    foldRight(l, "")((a: Int, acc: String) => (a.toString() + acc)).toInt
 
   // 6. mergeSorted
 
@@ -167,11 +169,21 @@ object List:
       case _ => None
     */
 
-    //se asume lista no vacía
+    
   def digitsToNumOption2(l: List[Int]): Option[Int] = 
     def checkList2(li: List[Int], isDigit: Boolean): Option[Int] =
       li match
+        //si quedan números, comprobamos el primero.
+        //si es correcto, seguimos comprobando el resto y pasamos la marca true
         case Cons(head, tail) => if head >= 0 && head <= 9 then checkList2(tail, true) else None
-        case Nil => if isDigit then Some(digitsToNum(l)) else None
-    checkList2(l, true) 
+        //aqui creo que el if sobra. Si alguno era incorrecto, ya se ha retornado None antes
+        //case Nil => if isDigit then Some(digitsToNum(l)) else None
+        case Nil => Some(digitsToNum(l))
+    l match
+      //Si nos pasan lista vacía, "error"
+      case Nil => None
+      //Si hay numeros, comprobamos que estén entre [0, 9]
+      case Cons(head, tail) => checkList2(l, true) 
+    
+    
       
