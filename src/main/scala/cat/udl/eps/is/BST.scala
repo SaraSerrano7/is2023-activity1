@@ -9,7 +9,15 @@ enum BST[+A]:
   // 1. insert
 
   // La funció que passem ens indica si el primer paràmetre és més petit (<) que el segon
-  def insert[B >: A](a: B)(lt: (B, B) => Boolean): BST[B] = ???
+  
+  //se asume que no se insertan elementos repetidos
+  def insert[B >: A](a: B)(lt: (B, B) => Boolean): BST[B] =
+    this match
+      case Node(left, value, right) => if 
+        lt(a, value) 
+        then Node(left.insert(a)(lt), value, right) else Node(left, value, right.insert(a)(lt))
+      case Empty => Node(Empty, a, Empty)
+    
 
   // 2.find
 
