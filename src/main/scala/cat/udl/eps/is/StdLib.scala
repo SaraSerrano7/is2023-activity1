@@ -68,5 +68,15 @@ ya no hay -> ordenamos numéricamente las parejas
 
   // 2. The result is the sum of the first n powers of b
   // that is, b^0 + b^1 + .... + b^(n-1)
-  def sumFirstPowersOf(b: Int, n: Int): Int = ???
+
+  //stack safe
+  def sumFirstPowersOf(b: Int, n: Int): Int = 
+    def sumWithAcc(b: Int, n: Int, acc: Int): Int =
+      if n - 1 >= 0 then 
+        val sum = acc + scala.math.pow(b, n-1).toInt
+        sumWithAcc(b, n-1, sum) 
+        else acc
+    sumWithAcc(b, n, 0)
+   
+
 }
