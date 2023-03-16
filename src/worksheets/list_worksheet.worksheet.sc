@@ -48,3 +48,7 @@ var l1 = List(1, 3, 5)
 var l2 = List(4, 6)
 
 mergeSorted(l1, l2)(_ < _)
+
+val empty_list = List[Int]()
+
+//digitsToNum(empty_list)

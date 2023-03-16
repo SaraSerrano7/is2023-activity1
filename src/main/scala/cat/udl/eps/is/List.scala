@@ -137,11 +137,40 @@ object List:
   // 7. Veu una versió del digitsToNum que tracti l'error de que un dels números de la llista no és
   // un dígit -> la capçalera de la funció serà part del problema
 
-//option de int, que esten entre 0 y 9
+  //todo: limpiar esta basura
   def digitsToNumOption(l: List[Int]): Option[Int] =  
+    /*
+    2 casos:
+        Nil -> lista vacía -> error, no se puede pasar algo vacío
+        Cons -> tenemos elementos. Debemos recorrer la lista para asegurarnos que son digitos
+          def recorrer(lista, posicion)
+    */
+    //lo hago con un booleano porque no tengo la funcion de length
+    def checkList(li: List[Int]): Boolean = 
+      li match
+        case Cons(h, t) => h > 0 && h < 9 && checkList(t)
+        case Nil => true
+      
     l match
-      //ojo, verificar que es para todos los elementos, no solo el primero
-      case Cons(h, t) if h < 0 && h > 9   => digitsToNumOption(t)
-      case Nil => Some(digitsToNum(l))
+      //Si tengo elementos compruebo que son dígitos
+        //evalúo primero h para ahorrarme vueltas
+      case Cons(h, t)  => if h > 0 && h < 9 && checkList(t) then Some(digitsToNum(l)) else None
+      //Si me dan lista vacía, None
       case _ => None
-    
+    /*
+      //Recorremos la lista comprobando que todos los números estén entre 0 y 9
+      case Cons(h, t) if h > 0 && h < 9   => digitsToNumOption(t)
+      //Si hemos llegado hasta aquí, la lista no contenía números erróneos. 
+      //En caso de tener una lista vacía desde el principio, no se considera un error, y ya se gestiona en
+      case Nil => Some(digitsToNum(l))
+      //Solo llegaremos aquí en caso de encontrar un número que no esté en el rango [0, 9]
+      case _ => None
+    */
+
+  def digitsToNumOption2(l: List[Int]): Option[Int] = 
+    def checkList2(li: List[Int], isDigit: Boolean): Option[Int] =
+      li match
+        case Cons(head, tail) => if head >= 0 && head <= 9 then checkList2(tail, true) else None
+        case Nil => if isDigit then Some(digitsToNum(l)) else None
+    checkList2(l, true) 
+      
