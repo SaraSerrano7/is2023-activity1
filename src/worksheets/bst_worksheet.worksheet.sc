@@ -18,4 +18,6 @@ node5.insert(10)( _ < _)
 
 node5.find(7)(_ == _)
 
-false || true
+node5.insert(5)(_ < _)
+
+node5.insert2(5)(_ < _)

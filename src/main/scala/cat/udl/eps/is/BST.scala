@@ -18,6 +18,14 @@ enum BST[+A]:
         then Node(left.insert(a)(lt), value, right) else Node(left, value, right.insert(a)(lt))
       case Empty => Node(Empty, a, Empty)
     
+  def insert2[B >: A](a: B)(lt: (B, B) => Boolean): BST[B] =
+    this match
+      case Empty => Node(Empty, a, Empty)
+      case Node(left, value, right) if lt(a, value) => left.insert2(a)(lt)
+      case Node(left, value, right) if lt(value, a) => right.insert2(a)(lt)
+      case _ => this
+      
+    
 
   // 2.find
 
@@ -34,6 +42,11 @@ enum BST[+A]:
 
   // També és un dels que no ho provocat majors problemes
   def fold[B](b: B)(f: (B, A, B) => B): B = ???
+  /*
+    this match
+      case Node(left.fold(b)(f), value, right.fold(b)(f)) => f(left, value, right)
+      case Empty => b
+    */
 
 object BST:
 
