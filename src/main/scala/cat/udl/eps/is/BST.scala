@@ -55,7 +55,14 @@ object BST:
   porque, despues en inorder para retornar el árbol como lista, al ser estas simple linked list,
   no afectará al desperdicio de espacio
   */
-  def fromList[A](l: List[A])(lt: (A, A) => Boolean): BST[A] = ???
+  def fromList[A](l: List[A])(lt: (A, A) => Boolean): BST[A] = 
+    def toTree(l: List[A], tree: BST[A])(lt: (A, A) => Boolean): BST[A] = 
+      l match
+        case head :: next => 
+          val newTree = tree.insert(head)(lt)
+          toTree(next, newTree)(lt)
+        case Nil => tree //no se si devolver el mismo arbol o empty
+    toTree(l, Empty)(lt)
     /* l match
       case head :: next => Node(Empty, head, Empty).insert2(next)(lt).fromList(next)(lt)
       case Nil => Empty

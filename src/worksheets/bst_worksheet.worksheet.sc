@@ -41,3 +41,17 @@ val step2 = step1.insert2(2)(_ < _)
 //Cons(3, (4))
 
 val step3 = step2.insert2(3)(_ < _)
+
+//Cons(4, (Nil))
+
+val step4 = step3.insert2(4)(_ < _)
+
+//Nil
+
+//val step5 = step4.insert2(Empty)(_ < _)
+
+fromList(values)(_ < _)
+
+val unordered = List(3, 1, 4, 2)
+
+fromList(unordered)(_ < _)
