@@ -20,10 +20,6 @@ node5.find(7)(_ == _)
 
 node5.insert(5)(_ < _)
 
-node5.insert2(5)(_ < _)
-
-node5
-
 //----------------
 
 val initial = Empty
@@ -32,26 +28,31 @@ val values = List(1, 2, 3, 4)
 
 //Cons(1, (2, 3, 4))
 
-val step1 = initial.insert2(1)(_ < _)
+val step1 = initial.insert(1)(_ < _)
 
 //Cons(2, (3, 4))
 
-val step2 = step1.insert2(2)(_ < _)
+val step2 = step1.insert(2)(_ < _)
 
 //Cons(3, (4))
 
-val step3 = step2.insert2(3)(_ < _)
+val step3 = step2.insert(3)(_ < _)
 
 //Cons(4, (Nil))
 
-val step4 = step3.insert2(4)(_ < _)
+val step4 = step3.insert(4)(_ < _)
 
-//Nil
-
-//val step5 = step4.insert2(Empty)(_ < _)
 
 fromList(values)(_ < _)
 
 val unordered = List(3, 1, 4, 2)
 
 fromList(unordered)(_ < _)
+
+val listToTree1 = fromList(unordered)(_ < _)
+
+val listToTree2 = fromList(values)(_ < _)
+
+val treeToList1 = inorder(listToTree1)
+
+val treeToList2 = inorder(listToTree2)
