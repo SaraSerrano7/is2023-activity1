@@ -34,9 +34,10 @@ enum BST[+A]:
   // 3.fold
 
   // També és un dels que no ho provocat majors problemes
+ // @annotation.tailrec
   def fold[B](b: B)(f: (B, A, B) => B): B = 
     this match
-      case Node(left, value, right) => f(left.fold(b)(f), value, right.fold(b)(f))
+      case Node(left, value, right) => f(left.fold(b)(f), value, right.fold(b)(f)) 
       case Empty => b
 
 object BST:
@@ -59,9 +60,15 @@ object BST:
     toTree(l, Empty)(lt)
     
   // 5. inorder (via fold)
-  
+
   def inorder[A](t: BST[A]): List[A] = 
     t match
       case Node(left, value, right) => inorder(left) ++ (value :: inorder(right)) 
       case Empty => Nil
+
+  def inorderViaFold[A](t: BST[A]): List[A] = 
+    t.fold(Nil){
+      (l: List[A], v: A, r: List[A]) => l ++ (v :: r)
+    }
+    
     

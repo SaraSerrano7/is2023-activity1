@@ -56,3 +56,7 @@ val listToTree2 = fromList(values)(_ < _)
 val treeToList1 = inorder(listToTree1)
 
 val treeToList2 = inorder(listToTree2)
+
+val treeToList3 = inorderViaFold(listToTree1)
+
+val treeToList4 = inorderViaFold(listToTree2)
