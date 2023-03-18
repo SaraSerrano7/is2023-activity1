@@ -34,7 +34,7 @@ enum BST[+A]:
   // 3.fold
 
   // També és un dels que no ho provocat majors problemes
- // @annotation.tailrec
+  
   def fold[B](b: B)(f: (B, A, B) => B): B = 
     this match
       case Node(left, value, right) => f(left.fold(b)(f), value, right.fold(b)(f)) 
