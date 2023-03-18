@@ -35,7 +35,7 @@ val max_votos2 = todos_los_votos_ordenados2.take(escaños)
 
 //paso 5: buscamos a que partido pertenece cada escaño
 
-val lista_partidos_con_escaños: List[String] = buscar_partido(max_votos2, mapa_divisiones)
+val lista_partidos_con_escaños: List[String] = buscar_partido(List[String](), max_votos2, mapa_divisiones)
 
 //paso 6: mapeamos
 

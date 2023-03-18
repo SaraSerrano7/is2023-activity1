@@ -28,7 +28,8 @@ object Hondt {
     else
       n_votos :: Nil
 
-  def buscar_partido(max_votos: List[Int], mapa_divisiones: Map[String, List[Int]]): List[String] = 
+  @annotation.tailrec
+  def buscar_partido(acc: List[String], max_votos: List[Int], mapa_divisiones: Map[String, List[Int]]): List[String] = 
     def buscar_votos(voto: Int, mapa_divisiones: Map[String, List[Int]]): Map[Int, String] =//List[String] = 
       //NO mapa_divisiones.foreach((partido: String, lista_votos: List[Int]) => if lista_votos.contains(voto) then partido: String else "": String)
       
@@ -42,8 +43,9 @@ object Hondt {
       case head :: next => 
         val mapa_partido_con_escaño = buscar_votos(head, mapa_divisiones) 
         val partido_con_escaño: String = mapa_partido_con_escaño.apply(1)
-        partido_con_escaño :: buscar_partido(next, mapa_divisiones)
-      case Nil => Nil: List[String] 
+        val newAcc = partido_con_escaño :: acc 
+        buscar_partido(newAcc, next, mapa_divisiones)
+      case Nil => acc 
       /*
       podria acumular el resultado. ademas de hacerlo tailrecursive, lo dejo sorted
 
