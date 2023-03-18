@@ -2,6 +2,7 @@ package cat.udl.eps.is
 
 import scala.List
 import cat.udl.eps.is.List.foldLeft
+import src.worksheets.`hondt_worksheet.worksheet`.lista_divisiones
 
 // Eleccions Parlament Catalunya 2021 (Lleida)
 // https://www.parlament.cat/pcat/parlament/que-es-el-parlament/procediment-electoral/
@@ -19,8 +20,20 @@ object Hondt {
   // Recordeu que dins d'una funció podeu fer servir `val` per guardar resultats intermedis
   // i crear funcions auxiliars (si calen)
 
-  def hondt(votes: Map[String, Int], n: Int): Map[String, Int] = ???
-  
+  def hondt(votes: Map[String, Int], n: Int): Map[String, Int] = 
+    //paso 1: conseguir las divisiones de votos para cada partido
+    val mapa_divisiones = votes.map( (partido: String, n_votos: Int) => (partido, dividir(n_votos, n).reverse) )
+    //paso 2: conseguir los listas de valores y concatenarlos
+    val todos_los_votos = mapa_divisiones.flatMap((partido: String, l: List[Int]) => l).toList
+    //paso 3: ordenar valores
+    val todos_los_votos_ordenados2 = todos_los_votos.sorted(Ordering.Int.reverse)
+    //paso 4: nos quedamos los primeros n valores (sea n el número de escaños)
+    val max_votos2 = todos_los_votos_ordenados2.take(n)
+    //paso 5: buscamos a que partido pertenece cada escaño
+    val lista_partidos_con_escaños: List[String] = buscar_partido(List[String](), max_votos2, mapa_divisiones)
+    //paso 6: mapeamos
+    agrupar_escaños(lista_partidos_con_escaños, Map[String, Int]())
+
 
   def dividir(n_votos: Int, escaños: Int): List[Int] = 
     if escaños > 1 then
