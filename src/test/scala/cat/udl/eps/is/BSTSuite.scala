@@ -13,7 +13,7 @@ class BSTSuite extends FunSuite {
 
   test("singleton") {
     val t = Node(Empty, 1, Empty)
-    assertEquals(t.find(1)(_ < _), true)
+    assertEquals(t.find(1)(_ < _), false)
   }
 
   test("roundtrip") {

@@ -43,13 +43,25 @@ val lista_partidos_con_escaños: List[String] = buscar_partido(List[String](), m
 
 val resultado_final = agrupar_escaños(lista_partidos_con_escaños, Map[String, Int]())
 
-//val resultado_3 = re
+//val mapa_divisiones_ordenado = lista_divisiones.sortBy(using _)
+
+//-------------------------------
+// HondtV2
+
+//paso 1: montamos una lista con las divisiones concatenadas
+
+val v2ListaDivisiones = mapa_divisiones.map((partido: String, l: List[Int]) => l).toList
+
+//paso 2: nos quedamos con los maximos votos
 
 
 
-//val mapa_divisiones_ordenado = lista_divisiones.sortBy()
 
 
+
+
+
+//--------------------------
 
 val divisionMap: Map[String, List[Int]] = Map()
 

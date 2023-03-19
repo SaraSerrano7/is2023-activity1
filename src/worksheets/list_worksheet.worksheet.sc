@@ -64,4 +64,7 @@ digitsToNumOption(digitsListNotOk)
 val partitionList = List(1, 2, 3, 4, 5)
 
 partition(partitionList)(_ % 2 == 1)
-//partitionMap(partitionList)(_ / 5)
+
+partitionMap(partitionList)((n: Int) => (if n % 2 == 0 then Right(n) else Left(n)))
+
+sort1(List(2, 4, 3, 1))(_ < _)

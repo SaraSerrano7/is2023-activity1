@@ -20,6 +20,18 @@ object Hondt {
   // Recordeu que dins d'una funció podeu fer servir `val` per guardar resultats intermedis
   // i crear funcions auxiliars (si calen)
 
+  def hondt2(votes: Map[String, Int], n: Int): Map[String, Int] = ???
+    //paso 1: conseguir las divisiones de votos para cada partido 
+    ///val mapa_divisiones = votes.map( (partido: String, n_votos: Int) => (partido, dividir(n_votos, n).reverse) )
+    //val v2ListaDivisiones = mapa_divisiones.flatMap((partido: String, l: List[Int]) => l).toList
+
+  def buscarMaximosVotos(l: List[Int]): List[Int]= ???
+
+  def buscarEscaños2(mapaEscaños: Map[String, List[Int]], escaños: Int, listaEscaños: List[Int]): Map[String, Int] = ???
+    
+
+
+
   def hondt(votes: Map[String, Int], n: Int): Map[String, Int] = 
     //paso 1: conseguir las divisiones de votos para cada partido
     val mapa_divisiones = votes.map( (partido: String, n_votos: Int) => (partido, dividir(n_votos, n).reverse) )
@@ -34,6 +46,7 @@ object Hondt {
     //paso 6: mapeamos
     agrupar_escaños(lista_partidos_con_escaños, Map[String, Int]())
 
+    
 
   def dividir(n_votos: Int, escaños: Int): List[Int] = 
     if escaños > 1 then
