@@ -2,7 +2,6 @@ package cat.udl.eps.is
 
 import scala.List
 import cat.udl.eps.is.List.foldLeft
-import src.worksheets.`hondt_worksheet.worksheet`.lista_divisiones
 
 // Eleccions Parlament Catalunya 2021 (Lleida)
 // https://www.parlament.cat/pcat/parlament/que-es-el-parlament/procediment-electoral/
@@ -19,17 +18,6 @@ object Hondt {
 
   // Recordeu que dins d'una funció podeu fer servir `val` per guardar resultats intermedis
   // i crear funcions auxiliars (si calen)
-
-  def hondt2(votes: Map[String, Int], n: Int): Map[String, Int] = ???
-    //paso 1: conseguir las divisiones de votos para cada partido 
-    ///val mapa_divisiones = votes.map( (partido: String, n_votos: Int) => (partido, dividir(n_votos, n).reverse) )
-    //val v2ListaDivisiones = mapa_divisiones.flatMap((partido: String, l: List[Int]) => l).toList
-
-  def buscarMaximosVotos(l: List[Int]): List[Int]= ???
-
-  def buscarEscaños2(mapaEscaños: Map[String, List[Int]], escaños: Int, listaEscaños: List[Int]): Map[String, Int] = ???
-    
-
 
 
   def hondt(votes: Map[String, Int], n: Int): Map[String, Int] = 
@@ -56,14 +44,8 @@ object Hondt {
 
   @annotation.tailrec
   def buscar_partido(acc: List[String], max_votos: List[Int], mapa_divisiones: Map[String, List[Int]]): List[String] = 
-    def buscar_votos(voto: Int, mapa_divisiones: Map[String, List[Int]]): Map[Int, String] =//List[String] = 
-      //NO mapa_divisiones.foreach((partido: String, lista_votos: List[Int]) => if lista_votos.contains(voto) then partido: String else "": String)
-      
-      //mapa_divisiones.flatMap((partido: String, lista_votos: List[Int]) => if lista_votos.contains(voto) then (List(partido)) else (List[String]())).toList
-      
+    def buscar_votos(voto: Int, mapa_divisiones: Map[String, List[Int]]): Map[Int, String] = 
       mapa_divisiones.map((partido: String, lista_votos: List[Int]) => if lista_votos.contains(voto) then (1, partido) else (0, partido))
-
-      //NO mapa_divisiones.map((partido: String, lista_votos: List[Int]) => if lista_votos.contains(voto) then partido.toList else "".toList)
     
     max_votos match
       case head :: next => 
@@ -72,15 +54,8 @@ object Hondt {
         val newAcc = partido_con_escaño :: acc 
         buscar_partido(newAcc, next, mapa_divisiones)
       case Nil => acc 
-      /*
-      podria acumular el resultado. ademas de hacerlo tailrecursive, lo dejo sorted
-
-      */
 
   def agrupar_escaños(l: List[String], acc: Map[String, Int]): Map[String, Int] =
-    //def contar_escaños(l: List[String], acc: Map[String, Int])
-    
-    
     l match
       case head :: next => if acc.contains(head) then 
         val count = acc.apply(head)

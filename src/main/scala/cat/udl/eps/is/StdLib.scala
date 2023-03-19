@@ -47,15 +47,6 @@ object StdLib {
   // 1. The result is a map that, for each length, returns the
   // number of words of this particular length
 
-/*
-
-hay palabras -> añadimos al mapa
-  necesitamos un acumulador -> el mapa actual --> funcion auxiliar, acc inicial --> mapa vacío
-
-ya no hay -> ordenamos numéricamente las parejas
-
-*/
-  // tengo que pasarle la word, no la length
   def countLengths(words: List[String]): Map[Int, Int] = 
     def addPair(oldMap: Map[Int, Int], str: String): Map[Int, Int] = 
       val len = str.length()
@@ -63,7 +54,6 @@ ya no hay -> ordenamos numéricamente las parejas
         val currentValue = oldMap.apply(len) // buscamos cuantas veces ha aparecido la longitud 
         oldMap + (len -> (currentValue + 1)) // añadimos una aparición más
         else oldMap + (len -> 1) // no hemos encontrado esta longitud -> añadimos que la hemos visto 1 vez
-    // una vez terminado el foldLeft, ordenamos las claves para mayor armonía visual
     words.foldLeft(Map[Int, Int]())(addPair)
 
   // 2. The result is the sum of the first n powers of b

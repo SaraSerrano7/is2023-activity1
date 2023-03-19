@@ -118,19 +118,13 @@ object List:
   // un dígit -> la capçalera de la funció serà part del problema
     
   def digitsToNumOption(l: List[Int]): Option[Int] = 
-    def checkList(li: List[Int], isDigit: Boolean): Option[Int] =
+    def checkList(li: List[Int]): Option[Int] =
       li match
-        //si quedan números, comprobamos el primero.
-        //si es correcto, seguimos comprobando el resto y pasamos la marca true
-        case Cons(head, tail) => if head >= 0 && head <= 9 then checkList(tail, true) else None
-        //aqui creo que el if sobra. Si alguno era incorrecto, ya se ha retornado None antes
-        //case Nil => if isDigit then Some(digitsToNum(l)) else None
+        case Cons(head, tail) => if head >= 0 && head <= 9 then checkList(tail) else None
         case Nil => Some(digitsToNum(l))
     l match
-      //Si nos pasan lista vacía, "error"
       case Nil => None
-      //Si hay numeros, comprobamos que estén entre [0, 9]
-      case Cons(head, tail) => checkList(l, true) 
+      case Cons(head, tail) => checkList(l) 
     
     
       

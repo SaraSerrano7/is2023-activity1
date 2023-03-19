@@ -45,11 +45,6 @@ object BST:
   // Les llistes que farem servir són les de scala
 
   // 4. fromList
-  /*
-  Nota: podremos guardar la lista en forma de árbol no completo (o no equilibrado, no recuerdo)
-  porque, despues en inorder para retornar el árbol como lista, al ser estas simple linked list,
-  no afectará al desperdicio de espacio
-  */
   def fromList[A](l: List[A])(lt: (A, A) => Boolean): BST[A] = 
     def toTree(l: List[A], tree: BST[A])(lt: (A, A) => Boolean): BST[A] = 
       l match
